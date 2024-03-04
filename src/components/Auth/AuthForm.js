@@ -1,12 +1,15 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import classes from './AuthForm.module.css';
+import TokenContext from '../../store/tokenContext';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const cntxt = useContext(TokenContext);
 
 
   const switchAuthModeHandler = () => {
@@ -45,11 +48,12 @@ const AuthForm = () => {
       }
     })
     setIsLoading(false)
-    
+
     const data = await response.json();
     
     if (response.ok) {
       console.log(data);
+      cntxt.addToken(data.idToken)
     } else {
       let errorMessage = 'Authentication failed!'
       // const data = await response.json();
