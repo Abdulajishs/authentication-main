@@ -2,12 +2,14 @@ import { useContext, useRef, useState } from 'react';
 
 import classes from './AuthForm.module.css';
 import TokenContext from '../../store/tokenContext';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [isLoading, setIsLoading] = useState(false);
+  const history = useNavigate()
 
   const cntxt = useContext(TokenContext);
 
@@ -54,6 +56,7 @@ const AuthForm = () => {
     if (response.ok) {
       console.log(data);
       cntxt.addToken(data.idToken)
+      history("/")
     } else {
       let errorMessage = 'Authentication failed!'
       // const data = await response.json();

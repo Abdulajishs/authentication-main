@@ -11,7 +11,7 @@ const MainNavigation = () => {
 
   const removerHandler = (event)=>{
     event.preventDefault()
-    cntx.removeToken(cntx.token)
+    cntx.removeToken()
   }
   return (
     <header className={classes.header}>

@@ -1,10 +1,12 @@
 import { useContext, useRef } from 'react';
 import classes from './ProfileForm.module.css';
 import TokenContext from '../../store/tokenContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileForm = () => {
   const newPasswordRef = useRef("");
   const cntx = useContext(TokenContext);
+  const history = useNavigate()
 
   const token = cntx.token
 
@@ -27,6 +29,7 @@ const ProfileForm = () => {
 
       if (response.ok) {
         console.log(data);
+        history('/')
       } else {
         let errorMessage = 'Authentication failed!'
         // const data = await response.json();
@@ -43,6 +46,7 @@ const ProfileForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     changePasswordhandler(newPasswordRef.current.value)
+    newPasswordRef.current.value = "";
   }
 
   return (
