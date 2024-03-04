@@ -45,6 +45,7 @@ const AuthForm = () => {
       }
     })
     setIsLoading(false)
+    
     const data = await response.json();
     
     if (response.ok) {
