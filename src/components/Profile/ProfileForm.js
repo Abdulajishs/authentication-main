@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 const ProfileForm = () => {
   const newPasswordRef = useRef("");
-  const cntx = useContext(TokenContext);
+  const authcntxt = useContext(TokenContext);
   const history = useNavigate()
 
-  const token = cntx.token
+  const token = authcntxt.token
 
   const changePasswordhandler = async (password) => {
     let url ="https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAESowVGGv_4Mq7XTA0KSKy-_wQQFYIVOQ"

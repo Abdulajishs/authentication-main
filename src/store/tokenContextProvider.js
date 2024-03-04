@@ -2,28 +2,31 @@ import { useState } from "react"
 import TokenContext from "./tokenContext"
 
 const TokenContextProvider = (props) => {
-    const [enteredTokens,setEnteredTokens] = useState(null)
+    const initialToken = localStorage.getItem("token");
+    const [enteredTokens, setEnteredTokens] = useState(initialToken)
 
     const userIsLoggedIn = !!enteredTokens;
 
-    const addTokenHandler = (token) =>{
+    const addTokenHandler = (token) => {
         setEnteredTokens(token)
+        localStorage.setItem("token", enteredTokens)
     }
 
-    const removeTokenHandler = () =>{
-        setEnteredTokens (null)
+    const removeTokenHandler = () => {
+        setEnteredTokens(null)
+        localStorage.removeItem("token")
     }
 
     const tokenContext = {
         token: enteredTokens,
-        isLoggedIn : userIsLoggedIn,
+        isLoggedIn: userIsLoggedIn,
         addToken: addTokenHandler,
         removeToken: removeTokenHandler
     }
     return (
         <>
-        {console.log(enteredTokens)}
-        <TokenContext.Provider value={tokenContext}>{props.children}</TokenContext.Provider>
+            {/* {console.log(enteredTokens)} */}
+            <TokenContext.Provider value={tokenContext}>{props.children}</TokenContext.Provider>
         </>
     )
 }

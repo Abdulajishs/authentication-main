@@ -11,7 +11,7 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const history = useNavigate()
 
-  const cntxt = useContext(TokenContext);
+  const authcntxt = useContext(TokenContext);
 
 
   const switchAuthModeHandler = () => {
@@ -54,8 +54,8 @@ const AuthForm = () => {
     const data = await response.json();
     
     if (response.ok) {
-      console.log(data);
-      cntxt.addToken(data.idToken)
+      // console.log(data);
+      authcntxt.addToken(data.idToken)
       history("/")
     } else {
       let errorMessage = 'Authentication failed!'

@@ -5,13 +5,13 @@ import { useContext } from 'react';
 import TokenContext from '../../store/tokenContext';
 
 const MainNavigation = () => {
-  const cntx = useContext(TokenContext);
+  const authcntxt = useContext(TokenContext);
 
-  const isLoggedIn = cntx.isLoggedIn;
+  const isLoggedIn = authcntxt.isLoggedIn;
 
   const removerHandler = (event)=>{
     event.preventDefault()
-    cntx.removeToken()
+    authcntxt.removeToken()
   }
   return (
     <header className={classes.header}>
